@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.changer"
+    android:versionCode="1"
+    android:versionName="1.0" 
+	android:sharedUserId="android.uid.system"
+	>
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="18" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+		<service android:name=".NvRAM" >
+			<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+		</service> 
+		<service android:name=".NvRAMHide" >
+			<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+		</service> 
+        <!--activity  
+            android:name="com.example.androidtest.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-->
+	<receiver
+            android:name=".ChangerReceiver"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SECRET_CODE" />
+                <data
+                    android:host="8888"
+                    android:scheme="android_secret_code" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>

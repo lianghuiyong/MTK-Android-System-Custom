@@ -1,0 +1,38 @@
+平台：MT8312kk
+android版本：kk1
+标题：通过接口修改默认输入法、默认屏幕亮度、听筒声音
+其中在对应的system.prop文件中对应的配置项的名称为:
+
+默认输入法: ro.default.input.method
+默认屏幕亮度: ro.def.screen.brightness
+听筒声音: ro.custom.voice.call
+
+以上3项对应的值使用如下:
+ro.custom.voice.call=15
+
+ro.def.screen.brightness=255
+
+#xunfei com.iflytek.inputmethod.FlyIME/com.baidu.padinput.ImeService
+ro.default.input.method=com.iflytek.inputmethod.FlyIME
+
+其中还做了其它音频的接口, 如下图所示, 对应的音频的默认值如下
+SystemProperties.getInt("ro.custom.voice.call", 7),  // STREAM_VOICE_CALL
+SystemProperties.getInt("ro.custom.voice.system", 15),  // STREAM_SYSTEM
+SystemProperties.getInt("ro.custom.voice.ring", 8),  // STREAM_RING
+SystemProperties.getInt("ro.custom.voice.music", 8), // STREAM_MUSIC
+SystemProperties.getInt("ro.custom.voice.alarm", 8),  // STREAM_ALARM
+SystemProperties.getInt("ro.custom.voice.notification", 8),  // STREAM_NOTIFICATION
+SystemProperties.getInt("ro.custom.voice.bluetooth.sco", 7),  // STREAM_BLUETOOTH_SCO
+SystemProperties.getInt("ro.custom.voice.system.enforced", 15),  // STREAM_SYSTEM_ENFORCED
+SystemProperties.getInt("ro.custom.voice.dtme", 11), // STREAM_DTMF
+SystemProperties.getInt("ro.custom.voice.tts", 11),  // STREAM_TTS
+SystemProperties.getInt("ro.custom.voice.fm", 8),  // STREAM_FM
+SystemProperties.getInt("ro.custom.voice.matv", 8)  // STREAM_MATV
+
+
+涉及文件：
+alps\frameworks\base\media\java\android\media\AudioManager.java
+alps\frameworks\base\packages\SettingsProvider\src\com\android\providers\settings\DatabaseHelper.java
+以及对应项目中的system.prop文件(增加: ro.default.input.method、ro.def.screen.brightness、ro.custom.voice.call配置)
+
+
